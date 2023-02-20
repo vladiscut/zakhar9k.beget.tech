@@ -1,0 +1,104 @@
+{% extends 'bhome/aboutbase.html' %}
+{% load static %}
+{% block content %}
+{% load bhome_tags %}
+
+
+	<section id="about" class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>{{title}}</h2>
+					<a href='{% url "home" %}' class='link_back'>
+						<img src="{% static 'bhome/images/logo.png' %}" alt="Blarodarenie" class="logo_back">
+						<div class="hide_main">НА ГЛАВНУЮ</div>
+					</a>
+					<nav>
+						<div class="nav nav-tabs" id="myTab" role="tablist">
+					    	<button class="nav-link active btn_proj" id="about-tab" data-bs-toggle="tab" data-bs-target="#about_fond" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">О фонде</button>
+					    	<button class="nav-link btn_proj" id="steps-tab" data-bs-toggle="tab" data-bs-target="#our_team" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">Наша команда</button>
+							{% if docs %}
+					    	<button class="nav-link btn_proj" id="docs-tab" data-bs-toggle="tab" data-bs-target="#doc_project" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">Документы</button>
+							{% endif %}
+						</div>
+					</nav>
+					<div class="tab-content" id="navTabContent">
+						<div class="tab-pane fade show active p-3" id="about_fond" role="tabpanel" aria-lebelledby="about-tab">
+							<div class="ar">
+									<div class="row">
+										<div class="col-sm-12 col-md-6">
+											<div class="wh">Кто мы?</div>
+											<p class='wh_p'>
+												 Мы благотворительный фонд. Благотворительный фонд - это общественная организация, которая занимается тем, что оказывает помощь тем, кто в этом нуждается. Акимов Антон Анатольевич, основатель фонда, считает, что помогать необходимо не только материально, но и духовно, подсказывая подрастающему поколению верный и здоровый путь!
+											</p>
+											<div class="wh">Чем мы занимаемся?</div>
+											<p class='wh_p'>
+												Основной деятельностью Фонда является развитие и поддержка спортивного и культурного духа. Наша основная цель - дать молодежи возможность заниматься спортом бесплатно, при этом, приобщая их к культурно-нравственным, патриотическим и духовным ценностям
+											</p>
+										</div>
+										<div class="col-sm-12 col-md-6">
+											<div class="ar_wh">
+												<img src="{% static 'bhome/images/o_fonde.jpg' %}" class="img-fluid" alt="...">
+												<!-- <img src="img/1.jpg" alt="Blago" class="ar_wh_img"> -->
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+						<div class="tab-pane fade p-3" id="our_team" role="tabpanel" aria-lebelledby="team-tab">
+								<div class="ar">
+									<div class="row">
+										<div class="col-12">
+											<div class="title_table">
+												Руководство
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 col-md-6">
+											<img src="{% static 'bhome/images/AAA.jpg' %}" class="img-fluid ar_wh_img" width="250" height="100" alt="...">
+										</div>
+										<div class="col-sm-12 col-md-6">
+										<div class="wh_ab">Акимов Антон Анатольевич</div>
+											<p class='wh_p_ab'>
+												 Директор фонда
+											</p>
+										</div>
+										</div>
+										{% if partners %}
+										<div class="row">
+										<div class="col-12">
+											<div class="title_table">
+												Наши друзья
+											</div>
+										</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												{% show_partners %}
+										</div>
+										</div>
+										{% endif %}
+									</div>
+							</div>
+						{% if docs %}
+						<div class="tab-pane fade p-3" id="doc_project" role="tabpanel" aria-lebelledby="docs-tab">
+							<div class="ar" style="height: 715px;">
+								<div class="row">
+									<div class="col-12">
+										<div class="wh_1">Документы</div>
+											{% for doc in docs %}
+											<a href="{{ doc.file.url }}" style="font-size: 22px; color: green;padding: 30px;" target="_blank">{{doc.title}}</a>
+											{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>			
+	{% endblock %}

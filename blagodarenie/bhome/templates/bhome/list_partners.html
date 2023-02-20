@@ -1,0 +1,13 @@
+{% if partners %}
+
+{% load static %}
+
+<div class="owl-carousel owl-theme">
+    {% for p in partners %}
+    <div class="item-oc">
+        <a href="{{ p.url }}" target="_blank"><img src="{{ p.photo.url }}" class="rounded-circle" height="350px" alt="..."></a>
+        <p class='oc_text'>{{p.title}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

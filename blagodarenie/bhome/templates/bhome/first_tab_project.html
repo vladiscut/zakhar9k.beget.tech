@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="ar">
+{% if project.photo %}
+    <div class="row">
+        <div class="col-12">
+            <div class="wh">{{ project.title }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <img src="{{ project.photo.url }}" class="img-fluid mx-auto" style="padding:40px;" alt="...">
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="ar_wh">
+                    <p class='wh_p'>{{ project.content }}</p>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-12">
+            <div class="wh">{{ project.title }}</div>
+            <p class='wh_p'>{{ project.content }}</p>
+        </div>
+    </div>
+{% endif %}
+</div>

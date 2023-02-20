@@ -1,0 +1,95 @@
+{% extends 'bhome/aboutbase.html' %}
+{% load static %}
+{% block content %}
+{% load bhome_tags %}
+
+
+	<section id="about" class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>{{title}}</h2>
+					<a href='{% url "home" %}' class='link_back'>
+						<img src="{% static 'bhome/images/logo.png' %}" alt="Blarodarenie" class="logo_back">
+						<div class="hide_main">НА ГЛАВНУЮ</div>
+					</a>
+					<nav>
+						<div class="nav nav-tabs" id="myTab" role="tablist">
+					    	<button class="nav-link active btn_proj" id="about-tab" data-bs-toggle="tab" data-bs-target="#about_project" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">О проекте</button>
+					    	{% if news %}
+							<button class="nav-link btn_proj" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">Новости</button>
+							{% endif %}
+							{% if docs %}
+					    	<button class="nav-link btn_proj" id="docs-tab" data-bs-toggle="tab" data-bs-target="#doc_project" type="button" role="tab" aria-controls="ab_pr" aria-selected="true">Документы</button>
+							{% endif %}
+						</div>
+					</nav>
+					<div class="tab-content" id="navTabContent">
+						<div class="tab-pane fade show active p-3" id="about_project" role="tabpanel" aria-lebelledby="about-tab">
+							{% show_project_1tab project.pk %}
+						</div>
+						{% if news %}
+						<div class="tab-pane fade p-3" id="news" role="tabpanel" aria-lebelledby="news-tab" style="overflow-y: auto; overflow-x: hidden; height: 600px;">
+						  <div class="ar">
+								<div class="row">
+									<div class="col-12">
+										{% for new in news %}
+										{% if new.photo %}
+											<div class="row">
+												<div class="col-sm-12 col-md-6 " style="position:relative;">
+													<div class="wh">{{new.title}}</div>
+													<p class='wh_p'>
+														{{new.content|truncatewords:20}}</p>
+													<button class = "btn1">
+														<a href="{% url 'new' new.slug %}">Подробнее</a>
+													</button>
+												</div>
+												<div class="col-sm-12 col-md-6">
+													<div class="ar_wh">
+														<img src="{{ new.photo.url }}" class="img-fluid mx-auto primg"  alt="...">
+														<!-- <img src="img/1.jpg" alt="Blago" class="ar_wh_img"> -->
+													</div>
+												</div>
+											</div>
+										{% else %}
+											<div class="row">
+												<div class="col-sm-12 col-md-6 " style="position:relative;">
+													<div class="wh">{{new.title}}</div>
+													<button class = "btn1">
+													<a href="{% url 'new' new.slug %}">Подробнее</a>
+													</button>
+												</div>
+												<div class="col-sm-12 col-md-6">
+													<div class="ar_wh">
+														<p class='wh_p'>
+														{{new.content|truncatewords:20}}</p>
+													</div>
+												</div>
+											</div>
+										{% endif %}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						{% if docs %}
+						<div class="tab-pane fade p-3" id="doc_project" role="tabpanel" aria-lebelledby="docs-tab" style="overflow-y: auto; overflow-x: hidden;">
+							<div class="ar" style="height: 600px;">
+								<div class="row">
+									<div class="col-12">
+										<div class="wh_1">Отчетность</div>
+											{% for doc in docs %}
+											<a href="{{ doc.file.url }}" style="font-size: 22px; color: green;padding: 30px;" target="_blank">{{doc.title}}</a>
+											{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>			
+	{% endblock %}

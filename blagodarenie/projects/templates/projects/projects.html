@@ -1,0 +1,39 @@
+{% extends 'bhome/aboutbase.html' %}
+{% load static %}
+{% block content %}
+{% load bhome_tags %}
+
+<section id="projects_all" class="section">
+    <div class="container">
+        <h2>{{title}}</h2>
+        <a href='{% url "home" %}' class='link_back'>
+            <img src="{% static 'bhome/images/logo.png' %}" alt="Blarodarenie" class="logo_back">
+            <div class="hide_main">НА ГЛАВНУЮ</div>
+        </a>
+        <div class="ar" style="overflow-y: auto; overflow-x: hidden; height: 600px;">
+            <div class="row">
+                <div class="col-12">
+                    {% for p in projects %}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 " style="position:relative;">
+                                <div class="wh">{{p.title}}</div>
+                                <p class='wh_p'>
+                                    {{p.content|truncatewords:20}}</p>
+                                <button class = "btn1">
+                                    <a href="{% url 'project' p.slug %}">Подробнее о проекте</a>
+                                </button>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="ar_wh">
+                                    <img src="{{ p.photo.url }}" class="img-fluid mx-auto primg"  alt="...">
+                                    <!-- <img src="img/1.jpg" alt="Blago" class="ar_wh_img"> -->
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

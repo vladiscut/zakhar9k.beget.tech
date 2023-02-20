@@ -1,0 +1,50 @@
+{% extends 'bhome/aboutbase.html' %}
+{% load static %}
+{% block content %}
+{% load bhome_tags %}
+
+
+	<section id="about" class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>{{new.title}}</h2>
+					<a href='{% url "home" %}' class='link_back'>
+						<img src="{% static 'bhome/images/logo.png' %}" alt="Blarodarenie" class="logo_back">
+						<div class="hide_main">НА ГЛАВНУЮ</div>
+					</a>
+                    <div class="ar">
+                    {% if new.photo %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="wh">{{ new.title }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <img src="{{ new.photo.url }}" class="img-fluid mx-auto" style="padding:40px;" alt="...">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="ar_wh">
+                                        <p class='wh_p'>{{ new.content }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="wh">{{ new.title }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="ar_wh">
+                                        <p class='wh_p'>{{ new.content }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
